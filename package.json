@@ -1,11 +1,9 @@
 {
     "author": "OGK",
-    "version": "0.1",
+    "version": "0.2",
     "server_scripts": [
         "server/hit_handler.lua"
     ],
-    "client_scripts": [
-        "client/weapons.lua"
-    ],
+    "client_scripts": [],
     "files": []
 }
