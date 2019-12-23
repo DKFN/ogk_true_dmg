@@ -40,6 +40,7 @@ local function OnPlayerWeaponShot(player, weapon, hittype, hitid, hitx, hity, hi
 			final_health = victim_health - CORPSE_BONUS
 		end
 		if hitz > victim_feet_pos + 150 then
+			CallRemoteEvent(player, "TrueDmgHeadShot")
 			final_health = victim_health - HEADSHOT_BONUS
 		end
 		
