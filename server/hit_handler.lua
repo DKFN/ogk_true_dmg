@@ -1,4 +1,4 @@
-local OGK_TRUE_DMG_DEBUG = true
+local OGK_TRUE_DMG_DEBUG = false
 local debug_npc
 local HEADSHOT_BONUS = 35
 local CORPSE_BONUS = 10
