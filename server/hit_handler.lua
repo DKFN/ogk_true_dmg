@@ -38,12 +38,12 @@ local function OnPlayerWeaponShot(player, weapon, hittype, hitid, hitx, hity, hi
 		local hit_pos
 		local victim_health = healthGetter(hitid)
 		local final_health = victim_health
-		local crouched = GetPlayerMovementMode(player) == 4 -- 2 Walking 4 Crouched
+		local crouched = GetPlayerMovementMode(hitid) == 4 -- 2 Walking 4 Crouched
 		local corpseThreshold
 
 		if crouched then
 			corpseThreshold = 25
-			headTreshold = 75
+			headTreshold = 50
 		else
 			corpseThreshold = 50
 			headTreshold = 150
