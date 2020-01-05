@@ -18,16 +18,19 @@ local function OnPlayerWeaponShot(player, weapon, hittype, hitid, hitx, hity, hi
 		healthSetter = SetPlayerHealth
 		healthGetter = GetPlayerHealth
 		positionGetter = GetPlayerLocation
+		armorGetter = GetPlayerArmor
 	elseif hittype == 4 then
 		healthSetter = SetNPCHealth
 		healthGetter = GetNPCHealth
 		positionGetter = GetNPCLocation
+		armorGetter = function() return 0 end
 	end
 
 	if hittype == 2 or hittype == 4 then
     	-- First find the player that is in range of the hit
 		local victim = hitid
 		local victimx, victimy, victimz = positionGetter(hitid)
+		
 	
 		local victim_feet_pos = victimz - 90;
 
@@ -35,11 +38,22 @@ local function OnPlayerWeaponShot(player, weapon, hittype, hitid, hitx, hity, hi
 		local hit_pos
 		local victim_health = healthGetter(hitid)
 		local final_health = victim_health
+		local crouched = GetPlayerMovementMode(player) == 4 -- 2 Walking 4 Crouched
+		local corpseThreshold
 
-		if hitz > victim_feet_pos + 50 then
+		if crouched then
+			corpseThreshold = 25
+			headTreshold = 75
+		else
+			corpseThreshold = 50
+			headTreshold = 150
+		end
+
+		-- TODO: Handle armor
+		if hitz > victim_feet_pos + corpseThreshold then
 			final_health = victim_health - CORPSE_BONUS
 		end
-		if hitz > victim_feet_pos + 150 then
+		if hitz > victim_feet_pos + headTreshold then
 			CallRemoteEvent(player, "TrueDmgHeadShot")
 			final_health = victim_health - HEADSHOT_BONUS
 		end
